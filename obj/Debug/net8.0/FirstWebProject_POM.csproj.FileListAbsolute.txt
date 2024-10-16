@@ -206,3 +206,4 @@ C:\Users\Reni\source\repos\TestProject1\FirstWebProject_POM\obj\Debug\net8.0\ref
 C:\Users\Reni\source\repos\TestProject1\FirstWebProject_POM\obj\Debug\net8.0\FirstWebProject_POM.pdb
 C:\Users\Reni\source\repos\TestProject1\FirstWebProject_POM\obj\Debug\net8.0\FirstWebProject_POM.genruntimeconfig.cache
 C:\Users\Reni\source\repos\TestProject1\FirstWebProject_POM\obj\Debug\net8.0\ref\FirstWebProject_POM.dll
+C:\Users\Reni\source\repos\TestProject1\FirstWebProject_POM\obj\Debug\net8.0\FirstWebProject_POM.sourcelink.json

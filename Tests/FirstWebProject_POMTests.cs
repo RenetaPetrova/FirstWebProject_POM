@@ -91,5 +91,17 @@
 
             registerPage.AssertErrorUsernameRequirenments();
         }
+
+        [Test, Order(8)]
+        public void RegisterNewUserWithUserNameInCyrillicChars()
+        {
+            string username = "Иван123";
+            string password = "123456";
+            string email = "test@gmail.com";
+
+            registerPage.OpenRegisterPage();
+            registerPage.PerformRegistration(username, password, email);
+            registerPage.AssertErrorUsernameRequirenments();
+        }
     }
 }
