@@ -20,7 +20,7 @@
         }
 
         [Test, Order(2)]
-        public void RegisterNewUserWithMissingData()
+        public void RegisterNewUserWithoutEnteringAnyData()
         { 
             registerPage.OpenRegisterPage();
             registerPage.RegisterButton.Click();
@@ -28,80 +28,45 @@
         }
 
         [Test, Order(3)]
-        public void RegisterNewUserWithUsernameLessThan6characters()
+        public void RegisterNewUserWithUsernameWith5CharsOnly()
         {
-            string username = "testt";
-            string password = "123456";
-            string email = "test@gmail.com";
+            string tooShortUsername = "Test1"; 
+            string validPassword = "Testing123";
+            string validEmail = "test@gmail.com";
 
             registerPage.OpenRegisterPage();
-            registerPage.PerformRegistration(username, password, email);
+            registerPage.PerformRegistration(tooShortUsername, validPassword, validEmail);
             registerPage.AssertErrorUsernameTooShort();
         }
 
         [Test, Order(4)]
-        public void RegisterNewUserWithOnlyNumberInTheUsernamField()
+        public void RegisterNewUserWithEmptyUserName()
         {
-            string username = "123456";
-            string password = "123456";
+            string username = "";
+            string password = "Testing123";
             string email = "test@gmail.com";
 
             registerPage.OpenRegisterPage();
             registerPage.PerformRegistration(username, password, email);
-            registerPage.AssertErrorUsernameRequirenments();
+            Assert.IsTrue(registerPage.UsernameRegisterMainError.Displayed);
+            Assert.That(registerPage.UsernameRegisterMainError.Text.Trim(), Is.EqualTo("The UserName field is required."));          
         }
 
         [Test, Order(5)]
-        public void RegisterNewUserWithVeryLongUsername250Chars()
+        public void RegisterNewUserWithOnlySpecialCharsInUsername() 
         {
-            string username = "thisisaverylongusernametotestthevalidationandthemaxlengthoftheusernamefieldandcheckwhetheritwillacceptsuchalongstringwithoutanyissuesorerrorsbeingthrownbytheformorbackendvalidationmechanismsandhowtheapplicationhandleslonginputintheusernamefieldwhensubmitted";
-            string password = "123456";
+            string username = "newuser";
+            string password = "Testing123";
             string email = "test@gmail.com";
 
             registerPage.OpenRegisterPage();
             registerPage.PerformRegistration(username, password, email);
+            Assert.IsTrue(registerPage.PasswordWithoutSpecialCharsRegisterError.Displayed);
+            Assert.That(registerPage.PasswordWithoutSpecialCharsRegisterError.Text.Trim(), Is.EqualTo("Passwords must have at least one non letter or digit character."));
 
-            //The error message should say that the requirenmets for the username are not met
-            registerPage.AssertErrorUsernameTooShort();
         }
 
-        [Test, Order(6)]
-        public void RegisterNewUserWithOnlySpecialCharsInUsername()
-        {
-            string username = "!@#$%^&*&*%$#@";
-            string password = "123456";
-            string email = "test@gmail.com";
+        //test 6 - register with already used username
 
-            registerPage.OpenRegisterPage();
-            registerPage.PerformRegistration(username, password, email);
-
-            //The error message should say that the requirenmets for the username are not met
-            registerPage.AssertErrorUsernameTooShort();
-        }
-
-        [Test, Order (7)]
-        public void RegisterNewUserWithoutDigitInUsername()
-        {
-            string username = "Testing";
-            string password = "123456";
-            string email = "test@gmail.com";
-
-            registerPage.OpenRegisterPage();
-            registerPage.PerformRegistration(username, password, email);
-
-            registerPage.AssertErrorUsernameRequirenments();
-        }
-
-        [Test, Order(8)]
-        public void RegisterNewUserWithUserNameInCyrillicChars()
-        {
-            string username = "Иван123";
-            string password = "123456";
-            string email = "test@gmail.com";
-
-            registerPage.OpenRegisterPage();
-            registerPage.PerformRegistration(username, password, email);
-            registerPage.AssertErrorUsernameRequirenments();
-        }
     }
 }

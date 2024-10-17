@@ -3,12 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\Reni\\source\\repos\\TestProject1\\FirstWebProject_POM\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{11BE7705-6D5E-4111-9D9E-2B740C00AA5E}|FirstWebProject_POM.csproj|c:\\users\\reni\\source\\repos\\testproject1\\firstwebproject_pom\\tests\\firstwebproject_pomtests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{11BE7705-6D5E-4111-9D9E-2B740C00AA5E}|FirstWebProject_POM.csproj|solutionrelative:tests\\firstwebproject_pomtests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{11BE7705-6D5E-4111-9D9E-2B740C00AA5E}|FirstWebProject_POM.csproj|c:\\users\\reni\\source\\repos\\testproject1\\firstwebproject_pom\\tests\\basetest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{11BE7705-6D5E-4111-9D9E-2B740C00AA5E}|FirstWebProject_POM.csproj|solutionrelative:tests\\basetest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{11BE7705-6D5E-4111-9D9E-2B740C00AA5E}|FirstWebProject_POM.csproj|c:\\users\\reni\\source\\repos\\testproject1\\firstwebproject_pom\\pages\\registerpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{11BE7705-6D5E-4111-9D9E-2B740C00AA5E}|FirstWebProject_POM.csproj|solutionrelative:pages\\registerpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{11BE7705-6D5E-4111-9D9E-2B740C00AA5E}|FirstWebProject_POM.csproj|c:\\users\\reni\\source\\repos\\testproject1\\firstwebproject_pom\\tests\\firstwebproject_pomtests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{11BE7705-6D5E-4111-9D9E-2B740C00AA5E}|FirstWebProject_POM.csproj|solutionrelative:tests\\firstwebproject_pomtests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{11BE7705-6D5E-4111-9D9E-2B740C00AA5E}|FirstWebProject_POM.csproj|c:\\users\\reni\\source\\repos\\testproject1\\firstwebproject_pom\\pages\\basepage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{11BE7705-6D5E-4111-9D9E-2B740C00AA5E}|FirstWebProject_POM.csproj|solutionrelative:pages\\basepage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,25 +30,51 @@
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "BasePage.cs",
+              "DocumentMoniker": "C:\\Users\\Reni\\source\\repos\\TestProject1\\FirstWebProject_POM\\Pages\\BasePage.cs",
+              "RelativeDocumentMoniker": "Pages\\BasePage.cs",
+              "ToolTip": "C:\\Users\\Reni\\source\\repos\\TestProject1\\FirstWebProject_POM\\Pages\\BasePage.cs",
+              "RelativeToolTip": "Pages\\BasePage.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAgwAkAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-17T11:39:32.997Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "BaseTest.cs",
+              "DocumentMoniker": "C:\\Users\\Reni\\source\\repos\\TestProject1\\FirstWebProject_POM\\Tests\\BaseTest.cs",
+              "RelativeDocumentMoniker": "Tests\\BaseTest.cs",
+              "ToolTip": "C:\\Users\\Reni\\source\\repos\\TestProject1\\FirstWebProject_POM\\Tests\\BaseTest.cs",
+              "RelativeToolTip": "Tests\\BaseTest.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAcwCUAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-17T11:39:29.482Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 1,
               "Title": "RegisterPage.cs",
               "DocumentMoniker": "C:\\Users\\Reni\\source\\repos\\TestProject1\\FirstWebProject_POM\\Pages\\RegisterPage.cs",
               "RelativeDocumentMoniker": "Pages\\RegisterPage.cs",
               "ToolTip": "C:\\Users\\Reni\\source\\repos\\TestProject1\\FirstWebProject_POM\\Pages\\RegisterPage.cs",
               "RelativeToolTip": "Pages\\RegisterPage.cs",
-              "ViewState": "AgIAACoAAAAAAAAAAAAiwDIAAAAvAAAAAAAAAA==",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAgwBUAAACzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-16T08:24:22.671Z"
+              "WhenOpened": "2024-10-16T08:24:22.671Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "FirstWebProject_POMTests.cs",
               "DocumentMoniker": "C:\\Users\\Reni\\source\\repos\\TestProject1\\FirstWebProject_POM\\Tests\\FirstWebProject_POMTests.cs",
               "RelativeDocumentMoniker": "Tests\\FirstWebProject_POMTests.cs",
               "ToolTip": "C:\\Users\\Reni\\source\\repos\\TestProject1\\FirstWebProject_POM\\Tests\\FirstWebProject_POMTests.cs",
               "RelativeToolTip": "Tests\\FirstWebProject_POMTests.cs",
-              "ViewState": "AgIAAE0AAAAAAAAAAAAUwGcAAAA8AAAAAAAAAA==",
+              "ViewState": "AgIAACoAAAAAAAAAAAAUwEQAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-16T08:12:08.094Z",
               "EditorCaption": ""
