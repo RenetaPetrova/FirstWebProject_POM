@@ -16,11 +16,13 @@ namespace FirstWebProject_POM.Pages
         public IWebElement ConfirmPasswordInput => driver.FindElement(By.Id("ConfirmPassword"));
         public IWebElement EmailInput => driver.FindElement(By.Id("Email"));
         public IWebElement RegisterButton => driver.FindElement(By.XPath("//input[@class='btn btn-default']"));
+        public IWebElement WelcomeMessage => driver.FindElement(By.XPath("//a[@title='Manage']"));
         public IWebElement UsernameRegisterMainError => driver.FindElement(By.XPath("//ul/li[text()='The UserName field is required.']"));
         public IWebElement UsernameTooShortRegisterError => driver.FindElement(By.XPath("//ul/li[text()='The UserName must be at least 6 charecters long.']"));
         public IWebElement PasswordEmptyRegisterError => driver.FindElement(By.XPath("//ul/li[text()='The Password field is required.']"));
         public IWebElement PasswordWithoutSpecialCharsRegisterError => driver.FindElement(By.XPath("//ul/li[text()='Passwords must have at least one non letter or digit character.']"));
         public IWebElement EmailEmptyRegisterError => driver.FindElement(By.XPath("//ul/li[text()='The Email field is required.']"));
+        public IWebElement AlreadyUserUsernameError => driver.FindElement(By.XPath("//ul/li[text()='Name lambda is already taken.']"));
 
 
         public void OpenRegisterPage()
@@ -48,10 +50,6 @@ namespace FirstWebProject_POM.Pages
             Assert.That(EmailEmptyRegisterError.Text.Trim(), Is.EqualTo("The Email field is required."));
         }
 
-        public void AssertErrorUsernameTooShort()
-        {
-            Assert.That(UsernameTooShortRegisterError.Text.Trim(), Is.EqualTo("The UserName must be at least 6 charecters long."));
-        }
         //public void AssertErrorPasswordRequirenments()
         //{
         //    Assert.That(UsernameOnlyDigitsRegisterError.Text.Trim(), 
