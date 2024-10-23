@@ -50,6 +50,75 @@ namespace FirstWebProject_POM.Pages
             Assert.That(EmailEmptyRegisterError.Text.Trim(), Is.EqualTo("The Email field is required."));
         }
 
+        public string GenerateRandomBulgarianName()
+        {
+            Random random = new Random();
+            string bulgarianLetters = "абвгдежзийклмнопрстуфхцчшщъьюяАБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЬЮЯ";
+            int nameLength = random.Next(6, 12); // Length of the name between 6 and 12 characters
+            char[] randomName = new char[nameLength];
+
+            for (int i = 0; i < nameLength; i++)
+            {
+                randomName[i] = bulgarianLetters[random.Next(bulgarianLetters.Length)];
+            }
+
+            return new string(randomName);
+        }
+
+        public string GenerateRandomEmail()
+        {
+            Random random = new Random();
+            string emailChars = "ABCDefghigk12345!?#";
+            int emailLength = random.Next(6, 12);
+            char[] randomEmail = new char[emailLength];
+            for (int i = 0; i < emailLength; i++)
+            {
+                randomEmail[i] = emailChars[random.Next(emailChars.Length)];
+            }
+            return new string(randomEmail);
+        }
+
+        public string GenerateRandomSpecialCharsUsername()
+        {
+            Random random = new Random();
+            string specialChars = "!@#$%^&*";
+            int usernameLength = random.Next(6, 12);
+            char[] randomSpecialCharsName = new char[usernameLength];
+            for (int i = 0; i < usernameLength; i++)
+            {
+                randomSpecialCharsName[i] = specialChars[random.Next(specialChars.Length)];
+            }
+            return new string(randomSpecialCharsName);
+        }
+
+        public string GenerateRandomUsernameContainingOnlyDigits()
+        {
+            Random random = new Random();
+            string numbers = "1234567890";
+            int usernameLength = random.Next(6, 12);
+            char[] randomDigitsUsername = new char[usernameLength];
+            for (int i = 0; i < usernameLength; i++)
+            {
+                randomDigitsUsername[i] = numbers[random.Next(numbers.Length)];
+            }
+            return new string(randomDigitsUsername);
+        }
+
+        public string GenerateRandomUsername()
+        {
+            Random random = new Random();
+            string latinLetters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            int nameLength = random.Next(6, 12); // Length of the name between 6 and 12 characters
+            char[] randomName = new char[nameLength];
+
+            for (int i = 0; i < nameLength; i++)
+            {
+                randomName[i] = latinLetters[random.Next(latinLetters.Length)];
+            }
+
+            return new string(randomName);
+        }
+
         //public void AssertErrorPasswordRequirenments()
         //{
         //    Assert.That(UsernameOnlyDigitsRegisterError.Text.Trim(), 

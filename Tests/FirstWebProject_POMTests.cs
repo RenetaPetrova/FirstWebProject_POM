@@ -8,20 +8,27 @@
 
         }
 
-        [Test, Order (1)]
-        public void LoginWithEmptyUsernameAndPassword()
+        [Test, Order(1)]
+        public void RegisterNewUserWithAlreadyRegisteredUsername()
         {
-            string invalidName = "";
-            string invalidPassword = "";
+            // Arrange
+            string username = "lambda";
+            string password = "Testing123!";
+            string email = registerPage.GenerateRandomEmail();
+            email = $"user_{email}@gmail.com";  
+            // Act
+            registerPage.OpenRegisterPage();
+            registerPage.PerformRegistration(username, password, email);
 
-            loginPage.OpenLoginPage();
-            loginPage.PerformLogin(invalidName, invalidPassword);
-            loginPage.AssertLoginErrorMessages();
+            //Assert
+            Assert.True(registerPage.AlreadyUserUsernameError.Displayed, "The 'username already taken' error message was not displayed.");
+            Assert.That(registerPage.AlreadyUserUsernameError.Text.Trim(), Is.EqualTo("Name lambda is already taken."), "The 'username already taken' error message was not displayed.");
         }
 
         [Test, Order(2)]
         public void RegisterNewUserWithoutEnteringAnyData()
         { 
+            // Act + Assert
             registerPage.OpenRegisterPage();
             registerPage.RegisterButton.Click();
             registerPage.AssertRegisterAllErrorMessages();
@@ -30,68 +37,124 @@
         [Test, Order(3)]
         public void RegisterNewUserWithUsernameWith5CharsOnly()
         {
+            // Arrange
             string tooShortUsername = "Test1"; 
-            string validPassword = "Testing123";
-            string validEmail = "test@gmail.com";
+            string password = "Testing123!";
+            string email = registerPage.GenerateRandomEmail();
+            email = $"user_{email}@gmail.com";
 
+            // Act
             registerPage.OpenRegisterPage();
-            registerPage.PerformRegistration(tooShortUsername, validPassword, validEmail);
-            Assert.IsTrue(registerPage.UsernameTooShortRegisterError.Displayed);
-            Assert.That(registerPage.UsernameTooShortRegisterError.Text.Trim(), Is.EqualTo("The UserName must be at least 6 charecters long."));
+            registerPage.PerformRegistration(tooShortUsername, password, email);
+            
+            // Assert
+            Assert.IsTrue(registerPage.UsernameTooShortRegisterError.Displayed, "The 'username too short' error message was not displayed.");
+            Assert.That(registerPage.UsernameTooShortRegisterError.Text.Trim(), Is.EqualTo("The UserName must be at least 6 charecters long."), "The 'username too short' error message was not displayed.");
         }
 
         [Test, Order(4)]
         public void RegisterNewUserWithUsernameWith250Chars()
         {
+            // Arrange
             string tooLongUsername = "thisisaverylongusernametotestthevalidationandthemaxlengthoftheusernamefieldandcheckwhetheritwillacceptsuchalongstringwithoutanyissuesorerrorsbeingthrownbytheformorbackendvalidationmechanismsandhowtheapplicationhandleslonginputintheusernamefieldwhensubmitted";
-            string validPassword = "Testing123";
-            string validEmail = "test123@gmail.com";
+            string password = "Testing123";
+            string email = registerPage.GenerateRandomEmail();
+            email = $"user_{email}@gmail.com";
 
+            // Act
             registerPage.OpenRegisterPage();
-            registerPage.PerformRegistration(tooLongUsername, validPassword, validEmail);
+            registerPage.PerformRegistration(tooLongUsername, password, email);
 
+            //Assert
             //The error message says that the username must be at least 6 charecters long instead that it is very long
-            Assert.IsTrue(registerPage.UsernameTooShortRegisterError.Displayed);
-            Assert.That(registerPage.UsernameTooShortRegisterError.Text.Trim(), Is.EqualTo("The UserName must be at least 6 charecters long."));
+            Assert.IsTrue(registerPage.UsernameTooShortRegisterError.Displayed, "The 'username too short' error message was not displayed.");
+            Assert.That(registerPage.UsernameTooShortRegisterError.Text.Trim(), Is.EqualTo("The UserName must be at least 6 charecters long."), "The 'username too short' error message was not displayed.");
         }
 
         [Test, Order(5)]
         public void RegisterNewUserWithEmptyUserName()
         {
+            // Arrange
             string username = "";
             string password = "Testing123";
-            string email = "test@gmail.com";
+            string email = registerPage.GenerateRandomEmail();
+            email = $"user_{email}@gmail.com";
 
+            // Act
             registerPage.OpenRegisterPage();
             registerPage.PerformRegistration(username, password, email);
-            Assert.IsTrue(registerPage.UsernameRegisterMainError.Displayed);
-            Assert.That(registerPage.UsernameRegisterMainError.Text.Trim(), Is.EqualTo("The UserName field is required."));          
+            
+            // Assert
+            Assert.IsTrue(registerPage.UsernameRegisterMainError.Displayed, "The 'username required' error message was not displayed.");
+            Assert.That(registerPage.UsernameRegisterMainError.Text.Trim(), Is.EqualTo("The UserName field is required."), "The 'username required' error message text is incorrect.");          
         }
 
         [Test, Order(6)]
         public void RegisterNewUserWithOnlySpecialCharsInUsername() 
         {
-            string username = "newuser";
-            string password = "Testing123";
-            string email = "test@gmail.com";
+            // Arrange
+            string username = registerPage.GenerateRandomSpecialCharsUsername();
+            string password = "Testing123!";
+            string email = registerPage.GenerateRandomEmail();
+            email = $"user_{email}@gmail.com"; 
 
+            // Act
             registerPage.OpenRegisterPage();
             registerPage.PerformRegistration(username, password, email);
-            Assert.IsTrue(registerPage.PasswordWithoutSpecialCharsRegisterError.Displayed);
-            Assert.That(registerPage.PasswordWithoutSpecialCharsRegisterError.Text.Trim(), Is.EqualTo("Passwords must have at least one non letter or digit character."));
+            
+            // Assert
+            Assert.That(driver.Url, Is.EqualTo(registerPage.BaseUrl), "The registration did not redirect to the expected page.");
         }
 
-        [Test, Order (7)]
-        public void RegisterNewUserWithAlreadyRegisteredUsername()
+        [Test, Order(7)]
+        public void RegisterNewUserWithUsernameInBulgarian()
         {
-            string username = "lambda";
+            // Arrange
+            string randomBulgarianName = registerPage.GenerateRandomBulgarianName();
             string password = "Testing123!";
-            string email = "something@yahoo.com";
+            string email = registerPage.GenerateRandomEmail();
+            email = $"user_{email}@gmail.com";
 
+            // Act
             registerPage.OpenRegisterPage();
-            registerPage.PerformRegistration(username, password, email); 
-            Assert.True(registerPage.AlreadyUserUsernameError.Displayed);
-            Assert.That(registerPage.AlreadyUserUsernameError.Text.Trim(), Is.EqualTo("Name lambda is already taken."));
+            registerPage.PerformRegistration(randomBulgarianName, password, email);
+
+            // Assert: Check that the current URL is the base URL, indicating a successful redirect
+            Assert.That(driver.Url, Is.EqualTo(registerPage.BaseUrl), "The registration did not redirect to the expected page.");
+        }
+
+        [Test, Order(8)]
+        public void RegisterNewUserWithOnlyDidgitsInUsername()
+        {
+            // Arrange
+            string username = registerPage.GenerateRandomUsernameContainingOnlyDigits();
+            string password = "Testing123!";
+            string email = registerPage.GenerateRandomEmail();
+            email = $"user_{email}@gmail.com";
+
+            // Act
+            registerPage.OpenRegisterPage();
+            registerPage.PerformRegistration(username, password, email);
+
+            // Assert: Check that the current URL is the base URL, indicating a successful redirect
+            Assert.That(driver.Url, Is.EqualTo(registerPage.BaseUrl), "The registration did not redirect to the expected page.");
+        }
+
+        [Test, Order(9)]
+        public void RegisterNewUserWithUnderscoreInUsername()
+        {
+            // Arrange
+            string username = registerPage.GenerateRandomUsername() + "_";
+            string password = "Testing123!";
+            string email = registerPage.GenerateRandomEmail();
+            email = $"user_{email}@gmail.com";
+
+            // Act
+            registerPage.OpenRegisterPage();
+            registerPage.PerformRegistration(username, password, email);
+
+            // Assert: Check that the current URL is the base URL, indicating a successful redirect
+            Assert.That(driver.Url, Is.EqualTo(registerPage.BaseUrl), "The registration did not redirect to the expected page.");
         }
     }
 }

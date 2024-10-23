@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FirstWebProject_POM")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+28f18f68763d4ee82fbc86d8dde7f615f52465a5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+99b65d5b956ae8b0950dffd69a347f2715af67ef")]
 [assembly: System.Reflection.AssemblyProductAttribute("FirstWebProject_POM")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FirstWebProject_POM")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

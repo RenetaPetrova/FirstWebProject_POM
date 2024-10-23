@@ -7,7 +7,7 @@ namespace FirstWebProject_POM.Pages
     {
         protected IWebDriver driver;
         protected WebDriverWait wait;
-        protected string BaseUrl = "http://eaapp.somee.com/";
+        public string BaseUrl = "http://eaapp.somee.com/";
 
         public BasePage(IWebDriver driver)
         {
