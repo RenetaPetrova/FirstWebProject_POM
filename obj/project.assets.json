@@ -1053,19 +1053,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Reni\\.nuget\\packages\\": {}
+    "C:\\Users\\renet\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Reni\\source\\repos\\TestProject1\\FirstWebProject_POM\\FirstWebProject_POM.csproj",
+      "projectUniqueName": "C:\\Users\\renet\\source\\repos\\FirstWebProject_POM\\FirstWebProject_POM.csproj",
       "projectName": "FirstWebProject_POM",
-      "projectPath": "C:\\Users\\Reni\\source\\repos\\TestProject1\\FirstWebProject_POM\\FirstWebProject_POM.csproj",
-      "packagesPath": "C:\\Users\\Reni\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Reni\\source\\repos\\TestProject1\\FirstWebProject_POM\\obj\\",
+      "projectPath": "C:\\Users\\renet\\source\\repos\\FirstWebProject_POM\\FirstWebProject_POM.csproj",
+      "packagesPath": "C:\\Users\\renet\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\renet\\source\\repos\\FirstWebProject_POM\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Reni\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\renet\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -1073,7 +1073,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -1142,7 +1141,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

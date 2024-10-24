@@ -101,9 +101,11 @@
             // Act
             registerPage.OpenRegisterPage();
             registerPage.PerformRegistration(username, password, email);
-            
+
             // Assert
             Assert.That(driver.Url, Is.EqualTo(registerPage.BaseUrl), "The registration did not redirect to the expected page.");
+            Assert.IsTrue(registerPage.WelcomeMessage.Displayed, "The 'welcome message' is not displayed correctly.");
+            Assert.That(registerPage.WelcomeMessage.Text.Trim(), Is.EqualTo($"Hello {username}!"), "The 'welcome message' is not displayed correctly.");
         }
 
         [Test, Order(7)]
@@ -121,6 +123,8 @@
 
             // Assert: Check that the current URL is the base URL, indicating a successful redirect
             Assert.That(driver.Url, Is.EqualTo(registerPage.BaseUrl), "The registration did not redirect to the expected page.");
+            Assert.IsTrue(registerPage.WelcomeMessage.Displayed, "The 'welcome message' is not displayed correctly.");
+            Assert.That(registerPage.WelcomeMessage.Text.Trim(), Is.EqualTo($"Hello {randomBulgarianName}!"), "The 'welcome message' is not displayed correctly.");
         }
 
         [Test, Order(8)]
@@ -138,6 +142,8 @@
 
             // Assert: Check that the current URL is the base URL, indicating a successful redirect
             Assert.That(driver.Url, Is.EqualTo(registerPage.BaseUrl), "The registration did not redirect to the expected page.");
+            Assert.IsTrue(registerPage.WelcomeMessage.Displayed, "The 'welcome message' is not displayed correctly.");
+            Assert.That(registerPage.WelcomeMessage.Text.Trim(), Is.EqualTo($"Hello {username}!"), "The 'welcome message' is not displayed correctly.");
         }
 
         [Test, Order(9)]
@@ -155,6 +161,28 @@
 
             // Assert: Check that the current URL is the base URL, indicating a successful redirect
             Assert.That(driver.Url, Is.EqualTo(registerPage.BaseUrl), "The registration did not redirect to the expected page.");
+            Assert.IsTrue(registerPage.WelcomeMessage.Displayed, "The 'welcome message' is not displayed correctly.");
+            Assert.That(registerPage.WelcomeMessage.Text.Trim(), Is.EqualTo($"Hello {username}!"), "The 'welcome message' is not displayed correctly.");
+        }
+
+        [Test, Order(10)]
+        public void RegisterNewUserWithDotInUsername()
+        {
+            // Arrange
+            string username = registerPage.GenerateRandomUsername() + ".t";
+            string password = "Testing123!";
+            string email = registerPage.GenerateRandomEmail();
+            email = $"{email}@gmail.com";
+
+            // Act
+            registerPage.OpenRegisterPage();
+            registerPage.PerformRegistration(username, password, email);
+
+            // Assert: Check that the current URL is the base URL, indicating a successful redirect
+            Assert.That(driver.Url, Is.EqualTo(registerPage.BaseUrl), "The registration did not redirect to the expected page.");
+            Assert.IsTrue(registerPage.WelcomeMessage.Displayed, "The 'welcome message' is not displayed correctly.");
+            Assert.That(registerPage.WelcomeMessage.Text.Trim(), Is.EqualTo($"Hello {username}!"), "The 'welcome message' is not displayed correctly.");
+
         }
     }
 }
