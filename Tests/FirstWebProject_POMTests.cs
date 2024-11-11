@@ -1,4 +1,7 @@
-﻿namespace FirstWebProject_POM.Tests
+﻿using OpenQA.Selenium.Support.UI;
+using OpenQA.Selenium;
+
+namespace FirstWebProject_POM.Tests
 {
     public class FirstWebProject_POMTests : BaseTest
     {
@@ -156,5 +159,105 @@
             // Assert: Check that the current URL is the base URL, indicating a successful redirect
             Assert.That(driver.Url, Is.EqualTo(registerPage.BaseUrl), "The registration did not redirect to the expected page.");
         }
+
+        [Test, Order(10)]
+        public void RegisterNewUserWithUnicodeSymbolInUsername()
+        {
+            // Arrange
+            string username = registerPage.GenerateRandomUsername() + "😊";
+            string password = "Testing123!";
+            string email = registerPage.GenerateRandomEmail();
+            email = $"user_{email}@gmail.com";
+
+            // Act
+            registerPage.OpenRegisterPage();
+
+            try
+            {
+                // Try to perform registration with Unicode in the username
+                registerPage.PerformRegistration(username, password, email);
+
+                // If no exception occurs, fail the test since the exception is expected
+                Assert.Fail("The test did not throw the expected WebDriverException.");
+            }
+            catch (OpenQA.Selenium.WebDriverException ex)
+            {
+                // Assert
+                Assert.That(ex.Message, Does.Contain("ChromeDriver only supports characters in the BMP"),
+                    "The WebDriverException was thrown, but the error message did not match the expected BMP limitation.");
+            }
+        }
+        
+        [Test, Order(11)]
+        public void RegisterNewUserWithEmptyPassword()
+        {
+            // Arrange
+            string username = registerPage.GenerateRandomUsername();
+            string password = "";
+            string email = registerPage.GenerateRandomEmail();
+            email = $"user_{email}@gmail.com";
+
+            // Act
+            registerPage.OpenRegisterPage();
+            registerPage.PerformRegistration(username, password, email);
+
+            // Assert
+            Assert.IsTrue(registerPage.PasswordEmptyRegisterError.Displayed, "The 'password required' error message was not displayed.");
+            Assert.That(registerPage.PasswordEmptyRegisterError.Text.Trim(), Is.EqualTo("The Password field is required."), "The 'password required' error message was not displayed.");
+        }
+
+        [Test, Order (12)]
+        public void RegisterNewUserWithTooShortPassword5Chars()
+        {
+            // Arrange
+            string username = registerPage.GenerateRandomUsername();
+            string password = "Tes1!";
+            string email = registerPage.GenerateRandomEmail();
+            email = $"user_{email}@gmail.com";
+
+            // Act
+            registerPage.OpenRegisterPage();
+            registerPage.PerformRegistration(username, password, email);
+
+            //Assert
+            Assert.IsTrue(registerPage.PasswordTooShortError.Displayed, "The 'password  must be at least 6 characters long' error message was not displayed.");
+            Assert.That(registerPage.PasswordTooShortError.Text.Trim(), Is.EqualTo("The Password must be at least 6 characters long."), "The 'password  must be at least 6 characters long' error message was not displayed.");
+        }
+
+        [Test, Order(13)]
+        public void RegisterNewUserWithPasswordWithASpaceInIt()
+        {
+            // Arrange
+            string username = registerPage.GenerateRandomUsername();
+            string password = "Testing 123!";
+            string email = registerPage.GenerateRandomEmail();
+            email = $"user_{email}@gmail.com";
+
+            // Act
+            registerPage.OpenRegisterPage();
+            registerPage.PerformRegistration(username, password, email);
+
+            // Assert
+            Assert.That(driver.Url, Is.EqualTo(registerPage.BaseUrl), "The registration did not redirect to the expected page.");
+        }
+
+        [Test, Order (14)]
+        public void RegisterNewUserWithoutLowerCaseLettersIPassword()
+        {
+            // Arrange
+            string username = registerPage.GenerateRandomUsername();
+            string password = "TESTING123!";
+            string email = registerPage.GenerateRandomEmail();
+            email = $"user_{email}@gmail.com";
+
+            // Act
+            registerPage.OpenRegisterPage();
+            registerPage.PerformRegistration(username, password, email);
+
+            //Assert
+            Assert.IsTrue(registerPage.PasswordWithoutLowercaseError.Displayed, "The 'password  must be at least one lowercase' error message was not displayed.");
+            Assert.That(registerPage.PasswordWithoutLowercaseError.Text.Trim(), Is.EqualTo("Passwords must have at least one lowercase ('a'-'z')."), "The 'at least one lowercase' error message was not displayed.");
+        }
+
     }
 }

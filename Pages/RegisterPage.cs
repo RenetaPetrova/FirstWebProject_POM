@@ -20,6 +20,8 @@ namespace FirstWebProject_POM.Pages
         public IWebElement UsernameRegisterMainError => driver.FindElement(By.XPath("//ul/li[text()='The UserName field is required.']"));
         public IWebElement UsernameTooShortRegisterError => driver.FindElement(By.XPath("//ul/li[text()='The UserName must be at least 6 charecters long.']"));
         public IWebElement PasswordEmptyRegisterError => driver.FindElement(By.XPath("//ul/li[text()='The Password field is required.']"));
+        public IWebElement PasswordTooShortError => driver.FindElement(By.XPath("//ul/li[text()='The Password must be at least 6 characters long.']"));
+        public IWebElement PasswordWithoutLowercaseError => driver.FindElement(By.XPath("//ul/li[text()=\"Passwords must have at least one lowercase ('a'-'z').\"]"));
         public IWebElement PasswordWithoutSpecialCharsRegisterError => driver.FindElement(By.XPath("//ul/li[text()='Passwords must have at least one non letter or digit character.']"));
         public IWebElement EmailEmptyRegisterError => driver.FindElement(By.XPath("//ul/li[text()='The Email field is required.']"));
         public IWebElement AlreadyUserUsernameError => driver.FindElement(By.XPath("//ul/li[text()='Name lambda is already taken.']"));
@@ -121,7 +123,7 @@ namespace FirstWebProject_POM.Pages
 
         //public void AssertErrorPasswordRequirenments()
         //{
-        //    Assert.That(UsernameOnlyDigitsRegisterError.Text.Trim(), 
+        //    Assert.That(UsernameOnlyDigitsRegisterError.Text.Trim(),
         //        Is.EqualTo("Passwords must have at least one non letter or digit character. Passwords must have at least one lowercase ('a'-'z'). " +
         //        "Passwords must have at least one uppercase ('A'-'Z')."));
         //}
