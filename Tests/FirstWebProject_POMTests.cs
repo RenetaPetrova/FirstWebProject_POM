@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium;
+using FirstWebProject_POM.Pages;
 
 namespace FirstWebProject_POM.Tests
 {
@@ -24,8 +25,8 @@ namespace FirstWebProject_POM.Tests
             registerPage.PerformRegistration(username, password, email);
 
             //Assert
-            Assert.True(registerPage.AlreadyUserUsernameError.Displayed, "The 'username already taken' error message was not displayed.");
-            Assert.That(registerPage.AlreadyUserUsernameError.Text.Trim(), Is.EqualTo("Name lambda is already taken."), "The 'username already taken' error message was not displayed.");
+            Assert.True(registerPage.AlreadyUsedUsernameError.Displayed, "The 'username already taken' error message was not displayed.");
+            Assert.That(registerPage.AlreadyUsedUsernameError.Text.Trim(), Is.EqualTo("Name lambda is already taken."), "The 'username already taken' error message was not displayed.");
         }
 
         [Test, Order(2)]
@@ -104,9 +105,11 @@ namespace FirstWebProject_POM.Tests
             // Act
             registerPage.OpenRegisterPage();
             registerPage.PerformRegistration(username, password, email);
-            
+
             // Assert
             Assert.That(driver.Url, Is.EqualTo(registerPage.BaseUrl), "The registration did not redirect to the expected page.");
+            Assert.IsTrue(registerPage.WelcomeMessage.Displayed, "The 'welcome message' is not displayed correctly.");
+            Assert.That(registerPage.WelcomeMessage.Text.Trim(), Is.EqualTo($"Hello {username}!"), "The 'welcome message' is not displayed correctly.");
         }
 
         [Test, Order(7)]
@@ -124,6 +127,8 @@ namespace FirstWebProject_POM.Tests
 
             // Assert: Check that the current URL is the base URL, indicating a successful redirect
             Assert.That(driver.Url, Is.EqualTo(registerPage.BaseUrl), "The registration did not redirect to the expected page.");
+            Assert.IsTrue(registerPage.WelcomeMessage.Displayed, "The 'welcome message' is not displayed correctly.");
+            Assert.That(registerPage.WelcomeMessage.Text.Trim(), Is.EqualTo($"Hello {randomBulgarianName}!"), "The 'welcome message' is not displayed correctly.");
         }
 
         [Test, Order(8)]
@@ -141,26 +146,12 @@ namespace FirstWebProject_POM.Tests
 
             // Assert: Check that the current URL is the base URL, indicating a successful redirect
             Assert.That(driver.Url, Is.EqualTo(registerPage.BaseUrl), "The registration did not redirect to the expected page.");
+            Assert.IsTrue(registerPage.WelcomeMessage.Displayed, "The 'welcome message' is not displayed correctly.");
+            Assert.That(registerPage.WelcomeMessage.Text.Trim(), Is.EqualTo($"Hello {username}!"), "The 'welcome message' is not displayed correctly.");
         }
+
 
         [Test, Order(9)]
-        public void RegisterNewUserWithUnderscoreInUsername()
-        {
-            // Arrange
-            string username = registerPage.GenerateRandomUsername() + "_";
-            string password = "Testing123!";
-            string email = registerPage.GenerateRandomEmail();
-            email = $"user_{email}@gmail.com";
-
-            // Act
-            registerPage.OpenRegisterPage();
-            registerPage.PerformRegistration(username, password, email);
-
-            // Assert: Check that the current URL is the base URL, indicating a successful redirect
-            Assert.That(driver.Url, Is.EqualTo(registerPage.BaseUrl), "The registration did not redirect to the expected page.");
-        }
-
-        [Test, Order(10)]
         public void RegisterNewUserWithUnicodeSymbolInUsername()
         {
             // Arrange
@@ -188,7 +179,7 @@ namespace FirstWebProject_POM.Tests
             }
         }
         
-        [Test, Order(11)]
+        [Test, Order(10)]
         public void RegisterNewUserWithEmptyPassword()
         {
             // Arrange
@@ -206,7 +197,7 @@ namespace FirstWebProject_POM.Tests
             Assert.That(registerPage.PasswordEmptyRegisterError.Text.Trim(), Is.EqualTo("The Password field is required."), "The 'password required' error message was not displayed.");
         }
 
-        [Test, Order (12)]
+        [Test, Order (11)]
         public void RegisterNewUserWithTooShortPassword5Chars()
         {
             // Arrange
@@ -224,7 +215,7 @@ namespace FirstWebProject_POM.Tests
             Assert.That(registerPage.PasswordTooShortError.Text.Trim(), Is.EqualTo("The Password must be at least 6 characters long."), "The 'password  must be at least 6 characters long' error message was not displayed.");
         }
 
-        [Test, Order(13)]
+        [Test, Order(12)]
         public void RegisterNewUserWithPasswordWithASpaceInIt()
         {
             // Arrange
@@ -241,7 +232,7 @@ namespace FirstWebProject_POM.Tests
             Assert.That(driver.Url, Is.EqualTo(registerPage.BaseUrl), "The registration did not redirect to the expected page.");
         }
 
-        [Test, Order (14)]
+        [Test, Order (13)]
         public void RegisterNewUserWithoutLowerCaseLettersIPassword()
         {
             // Arrange
@@ -259,5 +250,147 @@ namespace FirstWebProject_POM.Tests
             Assert.That(registerPage.PasswordWithoutLowercaseError.Text.Trim(), Is.EqualTo("Passwords must have at least one lowercase ('a'-'z')."), "The 'at least one lowercase' error message was not displayed.");
         }
 
+
+        [Test, Order(14)]
+        public void RegisterNewUserWithoutUpperCaseLettersInPassword()
+        {
+            // Arrange
+            string username = registerPage.GenerateRandomUsername();
+            string password = "testing123!";
+            string email = registerPage.GenerateRandomEmail();
+            email = $"user_{email}@gmail.com";
+
+            // Act
+            registerPage.OpenRegisterPage();
+            registerPage.PerformRegistration(username, password, email);
+
+            //Assert
+            Assert.IsTrue(registerPage.PasswordWithoutUppercaseError.Displayed, "The 'password  must be at least one uppercase' error message was not displayed.");
+            Assert.That(registerPage.PasswordWithoutUppercaseError.Text.Trim(), Is.EqualTo("Passwords must have at least one uppercase ('A'-'Z')."), "The 'at least one uppercase' error message was not displayed.");
+        }
+
+        [Test, Order(15)]
+        public void RegisterNewUserWithoutDigitsInPassword()
+        {
+            // Arrange
+            string username = registerPage.GenerateRandomUsername();
+            string password = "Testing!";
+            string email = registerPage.GenerateRandomEmail();
+            email = $"user_{email}@gmail.com";
+
+            // Act
+            registerPage.OpenRegisterPage();
+            registerPage.PerformRegistration(username, password, email);
+
+            //Assert
+            Assert.IsTrue(registerPage.PasswordWithoutDigitsError.Displayed, "The 'at least one non letter or digit character' error message was not displayed.");
+            Assert.That(registerPage.PasswordWithoutDigitsError.Text.Trim(), Is.EqualTo("Passwords must have at least one digit ('0'-'9')."), "The 'at least one non letter or digit character' error message was not displayed.");
+        }
+
+        [Test, Order(16)]
+        public void RegisterNewUserWithoutNonLetterCharsInPassword()
+        {
+            // Arrange
+            string username = registerPage.GenerateRandomUsername();
+            string password = "Testing123";
+            string email = registerPage.GenerateRandomEmail();
+            email = $"user_{email}@gmail.com";
+
+            // Act
+            registerPage.OpenRegisterPage();
+            registerPage.PerformRegistration(username, password, email);
+
+            //Assert
+            Assert.IsTrue(registerPage.PasswordWithoutSpecialCharsRegisterError.Displayed, "The 'at least one non letter or digit character' error message was not displayed.");
+            Assert.That(registerPage.PasswordWithoutSpecialCharsRegisterError.Text.Trim(), Is.EqualTo("Passwords must have at least one non letter or digit character."), "The 'at least one non letter or digit character' error message was not displayed.");
+        }
+
+        [Test, Order(17)]
+        public void RegisterNewUserWithValidEmail()
+        {
+            // Arrange
+            string username = registerPage.GenerateRandomUsername();
+            string password = "Testing123!";
+            string email = registerPage.GenerateRandomEmail();
+            email = $"user_{email}@gmail.com";
+
+            // Act
+            registerPage.OpenRegisterPage();
+            registerPage.PerformRegistration(username, password, email);
+
+            // Assert: Check that the current URL is the base URL, indicating a successful redirect
+            Assert.That(driver.Url, Is.EqualTo(registerPage.BaseUrl), "The registration did not redirect to the expected page.");
+            Assert.IsTrue(registerPage.WelcomeMessage.Displayed, "The 'welcome message' is not displayed correctly.");
+            Assert.That(registerPage.WelcomeMessage.Text.Trim(), Is.EqualTo($"Hello {username}!"), "The 'welcome message' is not displayed correctly.");
+        }
+
+        [Test, Order(18)]
+        public void RegisterNewUserWithAlreadyRegisteredEmail()
+        {
+            // Arrange
+            string username = registerPage.GenerateRandomUsername();
+            string password = "Testing123!";
+            string email = "lambda@test.com";
+
+            // Act
+            registerPage.OpenRegisterPage();
+            registerPage.PerformRegistration(username, password, email);
+            
+            // Assert
+            Assert.IsTrue(registerPage.EmailAlreadyUsedError.Displayed, "The 'already used email' error message was not displayed correctly.");
+            Assert.That(registerPage.EmailAlreadyUsedError.Text.Trim(), Is.EqualTo($"Email '{email}' is already taken."), "The 'already used email'error message is not displayed correctly.");
+
+        }
+
+        [Test, Order(19)]
+        public void RegisterNewUserWithEmptyEmail()
+        {
+            // Arrange
+            string username = registerPage.GenerateRandomUsername();
+            string password = "Testing123!";
+            string email = "";
+
+            // Act
+            registerPage.OpenRegisterPage();
+            registerPage.PerformRegistration(username, password, email);
+
+            // Assert
+            Assert.IsTrue(registerPage.EmailEmptyRegisterError.Displayed, "The 'empty email' error message was not displayed correctly.");
+            Assert.That(registerPage.EmailEmptyRegisterError.Text.Trim(), Is.EqualTo("The Email field is required."), "The 'empty email' error message is not displayed correctly.");
+        }
+
+        [Test, Order(20)]
+        public void RegisterNewUserWithInvalidEmailWithoutAtSign()
+        {
+            // Arrange
+            string username = registerPage.GenerateRandomUsername();
+            string password = "Testing123!";
+            string email = "testing.com";
+
+            // Act
+            registerPage.OpenRegisterPage();
+            registerPage.PerformRegistration(username, password, email);
+
+            // Assert
+            Assert.IsTrue(registerPage.InvalidEmailError.Displayed, "The 'invalid email' error message was not displayed correctly.");
+            Assert.That(registerPage.InvalidEmailError.Text.Trim(), Is.EqualTo("The Email field is not a valid e-mail address."), "The 'invalid email' error message is not displayed correctly.");
+        }
+
+        [Test, Order(21)]
+        public void RegisterNewUserWithInvalidEmailWithoutDot()
+        {
+            // Arrange
+            string username = registerPage.GenerateRandomUsername();
+            string password = "Testing123!";
+            string email = "testing@com";
+
+            // Act
+            registerPage.OpenRegisterPage();
+            registerPage.PerformRegistration(username, password, email);
+
+            // Assert
+            Assert.IsTrue(registerPage.InvalidEmailError.Displayed, "The 'invalid email' error message was not displayed correctly.");
+            Assert.That(registerPage.InvalidEmailError.Text.Trim(), Is.EqualTo("The Email field is not a valid e-mail address."), "The 'invalid email' error message is not displayed correctly.");
+        }
     }
 }

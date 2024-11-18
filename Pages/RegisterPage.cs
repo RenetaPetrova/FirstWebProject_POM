@@ -21,10 +21,14 @@ namespace FirstWebProject_POM.Pages
         public IWebElement UsernameTooShortRegisterError => driver.FindElement(By.XPath("//ul/li[text()='The UserName must be at least 6 charecters long.']"));
         public IWebElement PasswordEmptyRegisterError => driver.FindElement(By.XPath("//ul/li[text()='The Password field is required.']"));
         public IWebElement PasswordTooShortError => driver.FindElement(By.XPath("//ul/li[text()='The Password must be at least 6 characters long.']"));
+        public IWebElement PasswordWithoutDigitsError => driver.FindElement(By.XPath("//*[contains(text(), \"Passwords must have at least one digit ('0'-'9').\")]"));
         public IWebElement PasswordWithoutLowercaseError => driver.FindElement(By.XPath("//ul/li[text()=\"Passwords must have at least one lowercase ('a'-'z').\"]"));
+        public IWebElement PasswordWithoutUppercaseError => driver.FindElement(By.XPath("//ul/li[text()=\"Passwords must have at least one uppercase ('A'-'Z').\"]"));
         public IWebElement PasswordWithoutSpecialCharsRegisterError => driver.FindElement(By.XPath("//ul/li[text()='Passwords must have at least one non letter or digit character.']"));
         public IWebElement EmailEmptyRegisterError => driver.FindElement(By.XPath("//ul/li[text()='The Email field is required.']"));
-        public IWebElement AlreadyUserUsernameError => driver.FindElement(By.XPath("//ul/li[text()='Name lambda is already taken.']"));
+        public IWebElement EmailAlreadyUsedError => driver.FindElement(By.XPath("//ul/li[contains(text(), \"Email '\") and contains(text(), \"is already taken.\")]"));
+        public IWebElement AlreadyUsedUsernameError => driver.FindElement(By.XPath("//ul/li[text()='Name lambda is already taken.']"));
+        public IWebElement InvalidEmailError => driver.FindElement(By.XPath("//ul/li[text()='The Email field is not a valid e-mail address.']"));
 
 
         public void OpenRegisterPage()

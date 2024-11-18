@@ -24,6 +24,7 @@ namespace FirstWebProject_POM.Pages
         public IWebElement UdemyLink => driver.FindElement(By.XPath("//a[text()='Udemy']"));
         public IWebElement YoutubeLink => driver.FindElement(By.XPath("//a[text()='YouTube']"));
         public IWebElement LearnMoreLink => driver.FindElement(By.XPath("//a[text()='Learn more »']"));
+        public IWebElement LogoffLink => driver.FindElement(By.XPath("//a[text()='Log off']"));
         public IWebElement GetSourceCodeLink => driver.FindElement(By.XPath("//a[text()='Get Source code »']"));
     }
 }
