@@ -11,7 +11,7 @@ namespace FirstWebProject_POM.Pages
 
         public string Url => BaseUrl + "Account/Register";
 
-        public IWebElement userNameInput => driver.FindElement(By.Id("UserName"));
+        public IWebElement UserNameInput => driver.FindElement(By.Id("UserName"));
         public IWebElement PasswordInput => driver.FindElement(By.Id("Password"));
         public IWebElement ConfirmPasswordInput => driver.FindElement(By.Id("ConfirmPassword"));
         public IWebElement EmailInput => driver.FindElement(By.Id("Email"));
@@ -38,8 +38,8 @@ namespace FirstWebProject_POM.Pages
 
         public void PerformRegistration(string newUsername, string newPassword, string newEmail)
         {
-            userNameInput.Clear();
-            userNameInput.SendKeys(newUsername);
+            UserNameInput.Clear();
+            UserNameInput.SendKeys(newUsername);
             PasswordInput.Clear();
             PasswordInput.SendKeys(newPassword);
             ConfirmPasswordInput.Clear();
@@ -124,12 +124,5 @@ namespace FirstWebProject_POM.Pages
 
             return new string(randomName);
         }
-
-        //public void AssertErrorPasswordRequirenments()
-        //{
-        //    Assert.That(UsernameOnlyDigitsRegisterError.Text.Trim(),
-        //        Is.EqualTo("Passwords must have at least one non letter or digit character. Passwords must have at least one lowercase ('a'-'z'). " +
-        //        "Passwords must have at least one uppercase ('A'-'Z')."));
-        //}
     }
 }

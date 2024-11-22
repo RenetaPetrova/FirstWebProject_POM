@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium;
 using FirstWebProject_POM.Pages;
+using System.Globalization;
 
 namespace FirstWebProject_POM.Tests
 {
@@ -12,7 +13,7 @@ namespace FirstWebProject_POM.Tests
 
         }
 
-        [Test, Order(1)]
+        [Test]
         public void RegisterNewUserWithAlreadyRegisteredUsername()
         {
             // Arrange
@@ -29,7 +30,7 @@ namespace FirstWebProject_POM.Tests
             Assert.That(registerPage.AlreadyUsedUsernameError.Text.Trim(), Is.EqualTo("Name lambda is already taken."), "The 'username already taken' error message was not displayed.");
         }
 
-        [Test, Order(2)]
+        [Test]
         public void RegisterNewUserWithoutEnteringAnyData()
         { 
             // Act + Assert
@@ -38,7 +39,7 @@ namespace FirstWebProject_POM.Tests
             registerPage.AssertRegisterAllErrorMessages();
         }
 
-        [Test, Order(3)]
+        [Test]
         public void RegisterNewUserWithUsernameWith5CharsOnly()
         {
             // Arrange
@@ -56,7 +57,7 @@ namespace FirstWebProject_POM.Tests
             Assert.That(registerPage.UsernameTooShortRegisterError.Text.Trim(), Is.EqualTo("The UserName must be at least 6 charecters long."), "The 'username too short' error message was not displayed.");
         }
 
-        [Test, Order(4)]
+        [Test]
         public void RegisterNewUserWithUsernameWith250Chars()
         {
             // Arrange
@@ -75,7 +76,7 @@ namespace FirstWebProject_POM.Tests
             Assert.That(registerPage.UsernameTooShortRegisterError.Text.Trim(), Is.EqualTo("The UserName must be at least 6 charecters long."), "The 'username too short' error message was not displayed.");
         }
 
-        [Test, Order(5)]
+        [Test]
         public void RegisterNewUserWithEmptyUserName()
         {
             // Arrange
@@ -93,7 +94,7 @@ namespace FirstWebProject_POM.Tests
             Assert.That(registerPage.UsernameRegisterMainError.Text.Trim(), Is.EqualTo("The UserName field is required."), "The 'username required' error message text is incorrect.");          
         }
 
-        [Test, Order(6)]
+        [Test]
         public void RegisterNewUserWithOnlySpecialCharsInUsername() 
         {
             // Arrange
@@ -112,7 +113,7 @@ namespace FirstWebProject_POM.Tests
             Assert.That(registerPage.WelcomeMessage.Text.Trim(), Is.EqualTo($"Hello {username}!"), "The 'welcome message' is not displayed correctly.");
         }
 
-        [Test, Order(7)]
+        [Test]
         public void RegisterNewUserWithUsernameInBulgarian()
         {
             // Arrange
@@ -131,7 +132,7 @@ namespace FirstWebProject_POM.Tests
             Assert.That(registerPage.WelcomeMessage.Text.Trim(), Is.EqualTo($"Hello {randomBulgarianName}!"), "The 'welcome message' is not displayed correctly.");
         }
 
-        [Test, Order(8)]
+        [Test]
         public void RegisterNewUserWithOnlyDidgitsInUsername()
         {
             // Arrange
@@ -151,7 +152,7 @@ namespace FirstWebProject_POM.Tests
         }
 
 
-        [Test, Order(9)]
+        [Test]
         public void RegisterNewUserWithUnicodeSymbolInUsername()
         {
             // Arrange
@@ -179,7 +180,7 @@ namespace FirstWebProject_POM.Tests
             }
         }
         
-        [Test, Order(10)]
+        [Test]
         public void RegisterNewUserWithEmptyPassword()
         {
             // Arrange
@@ -197,7 +198,7 @@ namespace FirstWebProject_POM.Tests
             Assert.That(registerPage.PasswordEmptyRegisterError.Text.Trim(), Is.EqualTo("The Password field is required."), "The 'password required' error message was not displayed.");
         }
 
-        [Test, Order (11)]
+        [Test]
         public void RegisterNewUserWithTooShortPassword5Chars()
         {
             // Arrange
@@ -215,7 +216,7 @@ namespace FirstWebProject_POM.Tests
             Assert.That(registerPage.PasswordTooShortError.Text.Trim(), Is.EqualTo("The Password must be at least 6 characters long."), "The 'password  must be at least 6 characters long' error message was not displayed.");
         }
 
-        [Test, Order(12)]
+        [Test]
         public void RegisterNewUserWithPasswordWithASpaceInIt()
         {
             // Arrange
@@ -232,7 +233,7 @@ namespace FirstWebProject_POM.Tests
             Assert.That(driver.Url, Is.EqualTo(registerPage.BaseUrl), "The registration did not redirect to the expected page.");
         }
 
-        [Test, Order (13)]
+        [Test]
         public void RegisterNewUserWithoutLowerCaseLettersIPassword()
         {
             // Arrange
@@ -251,7 +252,7 @@ namespace FirstWebProject_POM.Tests
         }
 
 
-        [Test, Order(14)]
+        [Test]
         public void RegisterNewUserWithoutUpperCaseLettersInPassword()
         {
             // Arrange
@@ -269,7 +270,7 @@ namespace FirstWebProject_POM.Tests
             Assert.That(registerPage.PasswordWithoutUppercaseError.Text.Trim(), Is.EqualTo("Passwords must have at least one uppercase ('A'-'Z')."), "The 'at least one uppercase' error message was not displayed.");
         }
 
-        [Test, Order(15)]
+        [Test]
         public void RegisterNewUserWithoutDigitsInPassword()
         {
             // Arrange
@@ -287,7 +288,7 @@ namespace FirstWebProject_POM.Tests
             Assert.That(registerPage.PasswordWithoutDigitsError.Text.Trim(), Is.EqualTo("Passwords must have at least one digit ('0'-'9')."), "The 'at least one non letter or digit character' error message was not displayed.");
         }
 
-        [Test, Order(16)]
+        [Test]
         public void RegisterNewUserWithoutNonLetterCharsInPassword()
         {
             // Arrange
@@ -305,7 +306,7 @@ namespace FirstWebProject_POM.Tests
             Assert.That(registerPage.PasswordWithoutSpecialCharsRegisterError.Text.Trim(), Is.EqualTo("Passwords must have at least one non letter or digit character."), "The 'at least one non letter or digit character' error message was not displayed.");
         }
 
-        [Test, Order(17)]
+        [Test]
         public void RegisterNewUserWithValidEmail()
         {
             // Arrange
@@ -324,7 +325,7 @@ namespace FirstWebProject_POM.Tests
             Assert.That(registerPage.WelcomeMessage.Text.Trim(), Is.EqualTo($"Hello {username}!"), "The 'welcome message' is not displayed correctly.");
         }
 
-        [Test, Order(18)]
+        [Test]
         public void RegisterNewUserWithAlreadyRegisteredEmail()
         {
             // Arrange
@@ -342,7 +343,7 @@ namespace FirstWebProject_POM.Tests
 
         }
 
-        [Test, Order(19)]
+        [Test]
         public void RegisterNewUserWithEmptyEmail()
         {
             // Arrange
@@ -359,7 +360,7 @@ namespace FirstWebProject_POM.Tests
             Assert.That(registerPage.EmailEmptyRegisterError.Text.Trim(), Is.EqualTo("The Email field is required."), "The 'empty email' error message is not displayed correctly.");
         }
 
-        [Test, Order(20)]
+        [Test]
         public void RegisterNewUserWithInvalidEmailWithoutAtSign()
         {
             // Arrange
@@ -376,7 +377,7 @@ namespace FirstWebProject_POM.Tests
             Assert.That(registerPage.InvalidEmailError.Text.Trim(), Is.EqualTo("The Email field is not a valid e-mail address."), "The 'invalid email' error message is not displayed correctly.");
         }
 
-        [Test, Order(21)]
+        [Test]
         public void RegisterNewUserWithInvalidEmailWithoutDot()
         {
             // Arrange
@@ -392,5 +393,119 @@ namespace FirstWebProject_POM.Tests
             Assert.IsTrue(registerPage.InvalidEmailError.Displayed, "The 'invalid email' error message was not displayed correctly.");
             Assert.That(registerPage.InvalidEmailError.Text.Trim(), Is.EqualTo("The Email field is not a valid e-mail address."), "The 'invalid email' error message is not displayed correctly.");
         }
+
+        [Test]
+        public void LoginWithValiUsernameAndPassword()
+        {
+            // Arrange
+            string username = "test_user2";
+            string password = "Testing123!";
+
+
+            // Act
+            loginPage.OpenLoginPage();
+            loginPage.PerformLogin(username, password);
+
+            // Assert
+            Assert.That(driver.Url, Is.EqualTo(loginPage.BaseUrl), "The registration did not redirect to the expected page.");
+            Assert.Multiple(() =>
+            {
+                Assert.IsTrue(basePage.UdemyLink.Displayed, "Udemy link is not visible after login.");
+                Assert.IsTrue(basePage.YoutubeLink.Displayed, "YouTube link is not visible after login.");
+                Assert.IsTrue(basePage.LearnMoreLink.Displayed, "Learn More link is not visible after login.");
+                Assert.IsTrue(basePage.GetSourceCodeLink.Displayed, "Get Source Code link is not visible after login.");
+                Assert.IsTrue(basePage.VisitNowLink.Displayed, "Visit Now link is not visible after login.");
+                Assert.IsTrue(basePage.EmployeeListLink.Displayed, "Employee List link is not visible after login.");
+                Assert.IsTrue(basePage.HomePageLink.Displayed, "Homepage link is not visible after login.");
+                Assert.IsTrue(basePage.AboutLink.Displayed, "About link is not visible after login.");
+            });
+        }
+
+        [Test]
+        public void LoginWithoutEntereingAnyData() 
+        {
+            // Arrange
+            string username = "";
+            string password = "";
+
+            // Act
+            loginPage.OpenLoginPage();
+            loginPage.PerformLogin(username, password);
+
+            // Assert
+            loginPage.AssertLoginErrorMessages();
+        }
+
+        [Test]
+        public void LoginWithInvalidUsername() //try with already used username as well
+        {
+            // Arrange
+            string username = "something1!";
+            string password = "Testing123!";
+
+            // Act
+            loginPage.OpenLoginPage();
+            loginPage.PerformLogin(username, password);
+
+            // Assert
+            Assert.IsTrue(loginPage.InvalidLoginErrorMessage.Displayed, "The 'invalid login' error message was not displayed correctly.");
+            Assert.That(loginPage.InvalidLoginErrorMessage.Text.Trim(), Is.EqualTo("Invalid login attempt."), "The 'invalid login' error message was not displayed correctly.");
+        }
+
+        [Test]
+        public void LoginWithInvalidPassword()
+        {
+            // Arrange
+            string username = "test_user2";
+            string password = "Password123";
+
+            // Act
+            loginPage.OpenLoginPage();
+            loginPage.PerformLogin(username, password);
+
+            // Assert
+            Assert.IsTrue(loginPage.InvalidLoginErrorMessage.Displayed, "The 'invalid login' error message was not displayed correctly.");
+            Assert.That(loginPage.InvalidLoginErrorMessage.Text.Trim(), Is.EqualTo("Invalid login attempt."), "The 'invalid login' error message was not displayed correctly.");
+        }   
+
+        [Test]
+        public void RegisterNewUSerFromLoginPage()
+        {
+            // Arrange + Act
+            loginPage.OpenLoginPage();
+            loginPage.RegisterLink.Click();
+
+            // Assert
+            Assert.Multiple(() =>
+            {
+                Assert.That(driver.Url, Is.EqualTo(registerPage.Url), "The Register Now link did not redirect to the expected page.");
+                Assert.IsTrue(registerPage.UserNameInput.Displayed, "Username input field is not visible after redirection.");
+                Assert.IsTrue(registerPage.PasswordInput.Displayed, "Password input field is not visible after redirection.");
+                Assert.IsTrue(registerPage.ConfirmPasswordInput.Displayed, "Confirm Password input field is not visible after redirection.");
+                Assert.IsTrue(registerPage.EmailInput.Displayed, "Email input field is not visible after redirection.");
+                Assert.IsTrue(registerPage.RegisterButton.Displayed, "Register button is not visible after redirection.");
+            });
+        }
+
+        [Test]
+        public void VerifyAllElementsOnAboutPage()
+        {
+            // Arrange + Act
+            aboutPage.OpenAboutPage();
+
+            // Assert
+            Assert.Multiple(() =>
+            {
+                Assert.That(driver.Url, Is.EqualTo(aboutPage.Url), "The About page URL is not correct.");
+                Assert.IsTrue(aboutPage.PageHeading.Displayed, "The About page heading is not displayed.");
+                Assert.That(aboutPage.PageHeading.Text, Is.EqualTo("About."), "The About page heading text is incorrect.");
+                Assert.IsTrue(aboutPage.PageContent.Displayed, "The About page content is not displayed.");
+                Assert.That(aboutPage.PageContent.Text, Is.EqualTo("ExecuteAutomation Employee Application v1.0 is a simple web application for showing very few functionality of Employee details."),
+                    "The About page content text is incorrect.");
+                Assert.IsTrue(aboutPage.PageFooter.Displayed, "The About page footer is not displayed.");
+                Assert.That(aboutPage.PageFooter.Text, Is.EqualTo("© 2024 - Powered by ExecuteAutomation.com"), "The About page footer text is incorrect.");
+            });
+        }
+
     }
 }

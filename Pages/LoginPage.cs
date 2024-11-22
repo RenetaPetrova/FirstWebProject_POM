@@ -17,6 +17,8 @@ namespace FirstWebProject_POM.Pages
         public IWebElement RegistrationLink => driver.FindElement(By.XPath("//a[text()='Register as a new user']"));
         public IWebElement UsernameErrorMessage => driver.FindElement(By.XPath("(//span[@class='text-danger field-validation-error'])[1]"));
         public IWebElement PasswordErrorMessage => driver.FindElement(By.XPath("(//span[@class='text-danger field-validation-error'])[2]"));
+        public IWebElement InvalidLoginErrorMessage => driver.FindElement(By.XPath("(//ul/li[text()='Invalid login attempt.'])"));
+
 
 
         public void OpenLoginPage()

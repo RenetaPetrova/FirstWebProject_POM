@@ -9,6 +9,8 @@ namespace FirstWebProject_POM.Tests
         public IWebDriver driver;
         public LoginPage loginPage;
         public RegisterPage registerPage;
+        public BasePage basePage;
+        public AboutPage aboutPage;
 
 
         [OneTimeSetUp]
@@ -21,12 +23,16 @@ namespace FirstWebProject_POM.Tests
             driver = new ChromeDriver(chromeOprions);
             driver.Manage().Window.Maximize();
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+
             // Clear cookies to ensure no session persists
             driver.Manage().Cookies.DeleteAllCookies();
 
             //initiate the additional pages
             loginPage = new LoginPage(driver);
             registerPage = new RegisterPage(driver);
+            basePage = new BasePage(driver);
+            aboutPage = new AboutPage(driver);
+
 
             loginPage.OpenLoginPage();
             loginPage.PerformLogin("lambda", "Test123!");
