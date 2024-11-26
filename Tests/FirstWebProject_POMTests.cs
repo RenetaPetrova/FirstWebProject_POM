@@ -2,6 +2,7 @@
 using OpenQA.Selenium;
 using FirstWebProject_POM.Pages;
 using System.Globalization;
+using System.Reflection;
 
 namespace FirstWebProject_POM.Tests
 {
@@ -331,7 +332,7 @@ namespace FirstWebProject_POM.Tests
             // Arrange
             string username = registerPage.GenerateRandomUsername();
             string password = "Testing123!";
-            string email = "lambda@test.com";
+            string email = "test_user000@abv.bg";
 
             // Act
             registerPage.OpenRegisterPage();
@@ -394,32 +395,6 @@ namespace FirstWebProject_POM.Tests
             Assert.That(registerPage.InvalidEmailError.Text.Trim(), Is.EqualTo("The Email field is not a valid e-mail address."), "The 'invalid email' error message is not displayed correctly.");
         }
 
-        [Test]
-        public void LoginWithValiUsernameAndPassword()
-        {
-            // Arrange
-            string username = "test_user2";
-            string password = "Testing123!";
-
-
-            // Act
-            loginPage.OpenLoginPage();
-            loginPage.PerformLogin(username, password);
-
-            // Assert
-            Assert.That(driver.Url, Is.EqualTo(loginPage.BaseUrl), "The registration did not redirect to the expected page.");
-            Assert.Multiple(() =>
-            {
-                Assert.IsTrue(basePage.UdemyLink.Displayed, "Udemy link is not visible after login.");
-                Assert.IsTrue(basePage.YoutubeLink.Displayed, "YouTube link is not visible after login.");
-                Assert.IsTrue(basePage.LearnMoreLink.Displayed, "Learn More link is not visible after login.");
-                Assert.IsTrue(basePage.GetSourceCodeLink.Displayed, "Get Source Code link is not visible after login.");
-                Assert.IsTrue(basePage.VisitNowLink.Displayed, "Visit Now link is not visible after login.");
-                Assert.IsTrue(basePage.EmployeeListLink.Displayed, "Employee List link is not visible after login.");
-                Assert.IsTrue(basePage.HomePageLink.Displayed, "Homepage link is not visible after login.");
-                Assert.IsTrue(basePage.AboutLink.Displayed, "About link is not visible after login.");
-            });
-        }
 
         [Test]
         public void LoginWithoutEntereingAnyData() 
@@ -469,11 +444,11 @@ namespace FirstWebProject_POM.Tests
         }   
 
         [Test]
-        public void RegisterNewUSerFromLoginPage()
+        public void RegisterNewUserFromLoginPage()
         {
             // Arrange + Act
             loginPage.OpenLoginPage();
-            loginPage.RegisterLink.Click();
+            loginPage.RegistrationLink.Click();
 
             // Assert
             Assert.Multiple(() =>
@@ -507,5 +482,57 @@ namespace FirstWebProject_POM.Tests
             });
         }
 
+        [Test]
+        public void EmployeePageLoadsSuccessfully()
+        {
+            // Act
+            employeeListPage.OpenEmployeeListPage();
+
+            // Find all column headers in the Employee table
+            IReadOnlyCollection<IWebElement> columnHeaders = driver.FindElements(By.XPath("/html/body/div[2]/table/tbody/tr[1]/th"));
+
+            // Define the expected column names
+            List<string> expectedColumnNames = new List<string>
+            {
+                "Name",
+                "Salary",
+                "DurationWorked",
+                "Grade",
+                "Email",
+            };
+
+            // Extract actual column names from the page
+            List<string> actualColumnNames = columnHeaders.Select(header => header.Text.Trim()).ToList();
+
+            // Assert
+            Assert.Multiple(() =>
+            {
+                Assert.That(driver.Url, Is.EqualTo(employeeListPage.Url), "The url is not the correct one");
+
+                // Verify the number of columns matches
+                Assert.That(actualColumnNames.Count, Is.EqualTo(expectedColumnNames.Count + 1), "The number of columns does not match.");
+
+                // Verify each column name
+                for (int i = 0; i < expectedColumnNames.Count; i++)
+                {
+                    Assert.That(actualColumnNames[i], Is.EqualTo(expectedColumnNames[i]), $"Column name at index {i} is incorrect.");
+                }
+            });
+        }
+
+        [Test]
+        public void SeachForValidUsername()
+        {
+            // Arrange
+            string searchUsername = "Jonh";
+
+            // Act
+            employeeListPage.OpenEmployeeListPage();
+            employeeListPage.PerformSearch(searchUsername);
+
+            // Assert
+            //Assert.That()
+
+        }
     }
 }

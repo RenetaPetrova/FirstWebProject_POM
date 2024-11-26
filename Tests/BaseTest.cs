@@ -11,6 +11,7 @@ namespace FirstWebProject_POM.Tests
         public RegisterPage registerPage;
         public BasePage basePage;
         public AboutPage aboutPage;
+        public EmployeeListPage employeeListPage;
 
 
         [OneTimeSetUp]
@@ -32,10 +33,11 @@ namespace FirstWebProject_POM.Tests
             registerPage = new RegisterPage(driver);
             basePage = new BasePage(driver);
             aboutPage = new AboutPage(driver);
+            employeeListPage = new EmployeeListPage(driver);
 
 
             loginPage.OpenLoginPage();
-            loginPage.PerformLogin("lambda", "Test123!");
+            loginPage.PerformLogin("TestUser", "Test123!");
 
         }
 

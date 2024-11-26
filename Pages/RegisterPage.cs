@@ -113,16 +113,11 @@ namespace FirstWebProject_POM.Pages
         public string GenerateRandomUsername()
         {
             Random random = new Random();
-            string latinLetters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-            int nameLength = random.Next(6, 12); // Length of the name between 6 and 12 characters
-            char[] randomName = new char[nameLength];
+            string prefix = "User";  // Fixed prefix for the username
+            int randomNumber = random.Next(100, 1000);  // Generate a random number between 100 and 999
 
-            for (int i = 0; i < nameLength; i++)
-            {
-                randomName[i] = latinLetters[random.Next(latinLetters.Length)];
-            }
-
-            return new string(randomName);
+            return $"{prefix}{randomNumber}";  // Combine the prefix and the random number
         }
+
     }
 }
